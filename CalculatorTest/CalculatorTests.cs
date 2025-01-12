@@ -156,5 +156,16 @@ namespace Calculator.Tests
 
             Assert.AreEqual(answer, result);
         }
+
+
+        [TestMethod]
+        public void Add_CustomDelimeter_AnyLength_Return_66()
+        {
+            string input = "//[***]\n11***22***33";
+            var result = _calculator.Add(input);
+            int answer = 66;
+
+            Assert.AreEqual(answer, result);
+        }
     }
 }
