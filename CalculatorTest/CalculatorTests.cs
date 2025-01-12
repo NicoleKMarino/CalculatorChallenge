@@ -90,5 +90,27 @@ namespace Calculator.Tests
 
             Assert.AreEqual(answer, result);
         }
+
+        [TestMethod]
+        public void Add_LineDelim_Return_6()
+        {
+            string input = "1\n2,3";
+
+            var result = _calculator.Add(input);
+            int answer = 6;
+
+            Assert.AreEqual(answer, result);
+        }
+
+        [TestMethod]
+        public void Add_LineDelim_Return_7()
+        {
+            string input = "1,1\n2,3";
+
+            var result = _calculator.Add(input);
+            int answer = 7;
+
+            Assert.AreEqual(answer, result);
+        }
     }
 }
