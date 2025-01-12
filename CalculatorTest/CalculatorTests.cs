@@ -124,5 +124,16 @@ namespace Calculator.Tests
 
             Assert.AreEqual(expectedExceptionMessage, result.Message);
         }
+
+        [TestMethod]
+        public void Add_Over_1000_Return_8()
+        {
+            string input = "2,1001,6";
+
+            var result = _calculator.Add(input);
+            int expect = 8;
+
+            Assert.AreEqual(expect, result);
+        }
     }
 }

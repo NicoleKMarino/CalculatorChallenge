@@ -19,6 +19,7 @@ namespace CalculatorService
             {
                 int i = int.TryParse(number, out i) ? i : 0;
                 if(i < 0) negativeNums.Add(i);
+                if (i > 1000) i = 0;
 
                 total += i;
             }
