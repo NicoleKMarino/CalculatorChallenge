@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using CalculatorService;
+using System.Net.NetworkInformation;
 
 
 namespace Calculator.Tests
@@ -42,11 +43,10 @@ namespace Calculator.Tests
         {
             string input = "4,-3";
 
-            var result = _calculator.Add(input);
-            int answer = 1;
-
-            Assert.AreEqual(answer, result);
+            Assert.ThrowsException<Exception>(() => _calculator.Add(input));
         }
+
+
         [TestMethod]
         public void Add_Numbers_Return_78()
         {
@@ -111,6 +111,18 @@ namespace Calculator.Tests
             int answer = 7;
 
             Assert.AreEqual(answer, result);
+        }
+
+
+        [TestMethod]
+        public void ThrownException_NegativeNumbers()
+        {
+            string input = "-1,-3,5";
+            var expectedExceptionMessage = "These negative numbers are not allowed:-1,-3";
+
+            var result = Assert.ThrowsException<Exception>(() => _calculator.Add(input));
+
+            Assert.AreEqual(expectedExceptionMessage, result.Message);
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Contexts;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -12,11 +13,19 @@ namespace CalculatorService
         {
             string[] inputs = ParseString(inputString);
             int total = 0;
+            List<int> negativeNums = new List<int>();
 
             foreach (var number in inputs)
             {
                 int i = int.TryParse(number, out i) ? i : 0;
+                if(i < 0) negativeNums.Add(i);
+
                 total += i;
+            }
+
+            if (negativeNums.Count > 0)
+            {
+                throw new Exception("These negative numbers are not allowed:" + String.Join(",", negativeNums));
             }
 
             return total;
