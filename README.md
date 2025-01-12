@@ -26,7 +26,6 @@ o examples: //#\n2#5 will return 7; //,\n2,ff,100 will return 102
 o all previous formats should also be supported
 7. Support 1 custom delimiter of any length using the format: //[{delimiter}]\n{numbers}
 o example: //[***]\n11***22***33 will return 66
-
 o all previous formats should also be supported
 8. Support multiple delimiters of any length using the
 format: //[{delimiter1}][{delimiter2}]...\n{numbers}
