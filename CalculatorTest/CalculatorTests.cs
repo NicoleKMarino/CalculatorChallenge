@@ -47,14 +47,15 @@ namespace Calculator.Tests
 
             Assert.AreEqual(answer, result);
         }
-
         [TestMethod]
-        public void ThrowExceptionMoreThanTwoNumbers()
+        public void Add_Numbers_Return_78()
         {
-            string input = "4,3,7";
+            string input = "1,2,3,4,5,6,7,8,9,10,11,12";
 
-            Assert.ThrowsException<Exception>(() => _calculator.Add(input));
+            var result = _calculator.Add(input);
+            int answer = 78;
 
+            Assert.AreEqual(answer, result);
         }
 
         [TestMethod]
