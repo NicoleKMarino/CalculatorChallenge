@@ -34,7 +34,13 @@ namespace CalculatorService
 
         public String[] ParseString (string inputString)
         {
-            return inputString.Split(new char[] { ',', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+            List<char> delimiters = new List<char>() { ',', '\n' };
+            if (inputString.Substring(0, 2) == "//")
+            {
+                delimiters.Add(inputString.ElementAt(2));
+            }
+            return inputString.Split(delimiters.ToArray(), StringSplitOptions.RemoveEmptyEntries);
+
         }
     }
 }
