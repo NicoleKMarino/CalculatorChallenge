@@ -135,5 +135,26 @@ namespace Calculator.Tests
 
             Assert.AreEqual(expect, result);
         }
+
+
+        [TestMethod]
+        public void Add_CustomDelimeter_Return_7()
+        {
+            string input = "//#\n2#5";
+            var result = _calculator.Add(input);
+            int answer = 7;
+
+            Assert.AreEqual(answer, result);
+        }
+
+        [TestMethod]
+        public void Add_CustomDelimeter_Return_102()
+        {
+            string input = "//,\n2,ff,100";
+            var result = _calculator.Add(input);
+            int answer = 102;
+
+            Assert.AreEqual(answer, result);
+        }
     }
 }
