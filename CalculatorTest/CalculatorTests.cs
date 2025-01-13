@@ -167,5 +167,15 @@ namespace Calculator.Tests
 
             Assert.AreEqual(answer, result);
         }
+
+        [TestMethod]
+        public void Add_Many_CustomDelimeter_Return_110()
+        {
+            string input = "//[*][!!][r9r]\n11r9r22*hh*33!!44";
+            var result = _calculator.Add(input);
+            int answer = 110;
+
+            Assert.AreEqual(answer, result);
+        }
     }
 }
