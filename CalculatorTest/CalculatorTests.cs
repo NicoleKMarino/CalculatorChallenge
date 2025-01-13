@@ -2,6 +2,8 @@
 using System;
 using CalculatorService;
 using System.Net.NetworkInformation;
+using System.IO;
+using System.Text;
 
 
 namespace Calculator.Tests
@@ -10,6 +12,8 @@ namespace Calculator.Tests
     public class CalculatorTests
     {
         private CalculatorService.Calculator _calculator;
+        private StringBuilder ConsoleOutput { get; set; }
+
 
         public CalculatorTests()
         {
@@ -176,6 +180,21 @@ namespace Calculator.Tests
             int answer = 110;
 
             Assert.AreEqual(answer, result);
+        }
+
+        [TestMethod]
+        public void Display_Formula_Output()
+        {
+            string input = "2,,4,rrrr,1001,6";
+            string answer = "2+4+0+0+6=12";
+
+            var stringWriter = new StringWriter();
+            Console.SetOut(stringWriter);
+            var result = _calculator.Add(input);
+
+            string output = stringWriter.ToString();
+
+            Assert.IsTrue(output.Contains(answer));
         }
     }
 }
