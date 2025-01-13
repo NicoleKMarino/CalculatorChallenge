@@ -45,16 +45,29 @@ namespace CalculatorService
             {
                 int endOfDelimIndex = inputString.IndexOf('\n');
                 string singleDelimiter = inputString.Substring(2, endOfDelimIndex - 2);
+                string multiDelimiter = inputString.Substring(2, endOfDelimIndex - 2);
 
                 if (endOfDelimIndex > -1)
                 {
                     int leftIndex = singleDelimiter.IndexOf('[');
                     int rightIndex = singleDelimiter.IndexOf(']');
-                    if (leftIndex == 0 && rightIndex >= 0)
+
+                    foreach (char c in inputString)
                     {
-                        singleDelimiter = singleDelimiter.Substring(1, rightIndex - 1);
+                        if (leftIndex >= 0 && rightIndex > leftIndex)
+                        {
+                            singleDelimiter = multiDelimiter.Substring(leftIndex + 1, rightIndex - leftIndex - 1);
+
+                            delimiters.Add(singleDelimiter);
+                            leftIndex = multiDelimiter.IndexOf('[', rightIndex);
+                            rightIndex = multiDelimiter.IndexOf(']', rightIndex + 1);
+                        }
                     }
-                    delimiters.Add(singleDelimiter);
+
+                    if (multiDelimiter == singleDelimiter)
+                    {
+                        delimiters.Add(multiDelimiter);
+                    }
                 }
             }
             return inputString.Split(delimiters.ToArray(), StringSplitOptions.RemoveEmptyEntries);
