@@ -14,6 +14,7 @@ namespace CalculatorService
         public int Add(string inputString)
         {
             int total = 0;
+            StringBuilder formulaDisplay = new StringBuilder();
 
             if (!String.IsNullOrEmpty(inputString))
             {
@@ -25,7 +26,7 @@ namespace CalculatorService
                     int i = int.TryParse(number, out i) ? i : 0;
                     if (i < 0) negativeNums.Add(i);
                     if (i > 1000) i = 0;
-
+                    formulaDisplay.Append(i.ToString() + "+");
                     total += i;
                 }
 
@@ -33,6 +34,9 @@ namespace CalculatorService
                 {
                     throw new Exception("These negative numbers are not allowed:" + String.Join(",", negativeNums));
                 }
+
+                formulaDisplay.Remove(formulaDisplay.Length - 1, 1).Append("=" + total.ToString());
+                Console.WriteLine(formulaDisplay.ToString());
             }
 
             return total;
@@ -40,7 +44,7 @@ namespace CalculatorService
 
         public String[] ParseString(string inputString)
         {
-            List<string> delimiters = new List<string>() { ",", "\n" };
+            List<string> delimiters = new List<string>() { ",", "\n", "\\" };
             if (inputString.Substring(0, 2) == "//")
             {
                 int endOfDelimIndex = inputString.IndexOf('\n');
